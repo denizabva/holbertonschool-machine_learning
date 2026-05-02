@@ -20,30 +20,13 @@ def determinant(matrix):
             [matrix[i][j] for j in range(n) if j != col]
             for i in range(1, n)
         ]
-        sign = (-1) ** col
-        det += sign * matrix[0][col] * determinant(sub)
+        det += ((-1) ** col) * matrix[0][col] * determinant(sub)
 
     return det
 
 
-def minor(matrix):
-    """Compute minor matrix"""
-
-    n = len(matrix)
-    return [
-        [
-            determinant([
-                [matrix[i][j] for j in range(n) if j != col]
-                for i in range(n) if i != row
-            ])
-            for col in range(n)
-        ]
-        for row in range(n)
-    ]
-
-
 def cofactor(matrix):
-    """Calculates the cofactor matrix of a square matrix"""
+    """Calculates cofactor matrix"""
 
     if (not isinstance(matrix, list) or
             any(not isinstance(row, list) for row in matrix)):
@@ -57,12 +40,20 @@ def cofactor(matrix):
     if any(len(row) != n for row in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
 
-    minor_matrix = minor(matrix)
+    # FIX: 1x1 matrix case
+    if n == 1:
+        return [[1]]
 
-    return [
-        [
-            minor_matrix[i][j] * ((-1) ** (i + j))
-            for j in range(n)
-        ]
-        for i in range(n)
-    ]
+    cof = []
+
+    for i in range(n):
+        row_cof = []
+        for j in range(n):
+            sub = [
+                [matrix[x][y] for y in range(n) if y != j]
+                for x in range(n) if x != i
+            ]
+            row_cof.append(((-1) ** (i + j)) * determinant(sub))
+        cof.append(row_cof)
+
+    return cof
