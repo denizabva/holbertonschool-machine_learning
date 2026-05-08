@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Poisson distribution class"""
 
-import math
-
 
 class Poisson:
     """Represents a Poisson distribution"""
@@ -28,10 +26,16 @@ class Poisson:
             return 0
 
         k = int(k)
-        e = math.exp(-self.lambtha)
-        factorial = math.factorial(k)
 
-        return (self.lambtha ** k) * e / factorial
+        # compute e^-lambda without math module
+        e_neg_lambda = 2.7182818285 ** (-self.lambtha)
+
+        # factorial without math module
+        factorial = 1
+        for i in range(1, k + 1):
+            factorial *= i
+
+        return (self.lambtha ** k) * e_neg_lambda / factorial
 
     def cdf(self, k):
         """Calculates the CDF for a given number of successes"""
