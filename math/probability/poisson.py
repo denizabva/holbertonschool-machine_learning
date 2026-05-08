@@ -6,7 +6,7 @@ class Poisson:
     """Represents a Poisson distribution"""
 
     def __init__(self, data=None, lambtha=1.):
-        """Initialize the Poisson distribution"""
+        """Initialize Poisson distribution"""
         self.lambtha = float(lambtha)
 
         if data is None:
@@ -20,33 +20,17 @@ class Poisson:
 
             self.lambtha = float(sum(data) / len(data))
 
-   def pmf(self, k):
-    """Calculates the PMF for a given number of successes"""
-    if k < 0:
-        return 0
-
-    k = int(k)
-
-    # compute e^-λ without math module
-    e_neg_lambda = 2.7182818285 ** (-self.lambtha)
-
-    # compute k! manually
-    factorial = 1
-    for i in range(1, k + 1):
-        factorial *= i
-
-    # Poisson PMF formula
-    return (self.lambtha ** k) * e_neg_lambda / factorial
-
-    def cdf(self, k):
-        """Calculates the CDF for a given number of successes"""
+    def pmf(self, k):
+        """Calculates PMF for k successes"""
         if k < 0:
             return 0
 
         k = int(k)
-        result = 0
 
-        for i in range(k + 1):
-            result += self.pmf(i)
+        e = 2.7182818285 ** (-self.lambtha)
 
-        return result
+        factorial = 1
+        for i in range(1, k + 1):
+            factorial *= i
+
+        return (self.lambtha ** k) * e / factorial
