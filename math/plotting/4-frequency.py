@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 def frequency():
     """Function that plots the distribution of student grades"""
     np.random.seed(5)
-    student_grades = np.random.randint(0, 100, 50)
+    student_grades = np.random.normal(68, 15, 50)
 
     plt.hist(student_grades, bins=np.arange(0, 101, 10), edgecolor='black')
 
@@ -16,6 +16,4 @@ def frequency():
     plt.ylabel("Number of Students")
     plt.title("Project A")
 
-
-frequency()
-plt.show()
+    plt.show()
