@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """Calculates likelihoods for binomial data."""
 
-import math
-
 import numpy as np
+
+
+def factorial(num):
+    """Calculate the factorial of num."""
+    result = 1
+    for value in range(2, num + 1):
+        result *= value
+    return result
 
 
 def likelihood(x, n, P):
@@ -19,7 +25,5 @@ def likelihood(x, n, P):
     if np.any((P < 0) | (P > 1)):
         raise ValueError("All values in P must be in the range [0, 1]")
 
-    coefficient = math.factorial(n) / (
-        math.factorial(x) * math.factorial(n - x)
-    )
+    coefficient = factorial(n) / (factorial(x) * factorial(n - x))
     return coefficient * (P ** x) * ((1 - P) ** (n - x))
