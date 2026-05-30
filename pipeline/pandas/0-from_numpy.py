@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+This module contains a function that creates a pandas DataFrame from a numpy ndarray.
+"""
+
 import pandas as pd
 
 
