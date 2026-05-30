@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+This module loads data from a file into a pandas DataFrame.
+"""
+
 import pandas as pd
 
 
