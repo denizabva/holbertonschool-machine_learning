@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This module contains a function that renames and formats a DataFrame column.
+This module renames and formats a DataFrame column.
 """
 
 import pandas as pd
@@ -8,8 +8,7 @@ import pandas as pd
 
 def rename(df):
     """
-    Renames Timestamp column to Datetime, converts it to datetime values,
-    and returns only Datetime and Close columns.
+    Converts Timestamp to Datetime and returns only Datetime and Close columns.
 
     Args:
         df (pd.DataFrame): input dataframe containing Timestamp column
@@ -19,7 +18,7 @@ def rename(df):
     """
     df = df.copy()
 
-    df["Datetime"] = pd.to_datetime(df["Timestamp"], unit="s")
+    df["Timestamp"] = pd.to_datetime(df["Timestamp"], unit="s")
     df = df.rename(columns={"Timestamp": "Datetime"})
 
     return df[["Datetime", "Close"]]
