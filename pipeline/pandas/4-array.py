@@ -4,8 +4,6 @@ This module contains a function that extracts data from a DataFrame
 and converts it into a numpy array.
 """
 
-import pandas as pd
-
 
 def array(df):
     """
