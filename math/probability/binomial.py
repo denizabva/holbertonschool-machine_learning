@@ -28,10 +28,12 @@ class Binomial:
 
     def pmf(self, k):
         """Calculates the PMF for a given number of successes."""
-        if k < 0 or k > self.n:
+        if k < 0:
             return 0
 
         k = int(k)
+        if k > self.n:
+            return 0
 
         factorial_n = 1
         factorial_k = 1
@@ -47,3 +49,18 @@ class Binomial:
         combination = factorial_n / (factorial_k * factorial_n_k)
 
         return combination * (self.p ** k) * ((1 - self.p) ** (self.n - k))
+
+    def cdf(self, k):
+        """Calculates the CDF for a given number of successes."""
+        if k < 0:
+            return 0
+
+        k = int(k)
+        if k > self.n:
+            return 0
+
+        result = 0
+        for i in range(k + 1):
+            result += self.pmf(i)
+
+        return result
